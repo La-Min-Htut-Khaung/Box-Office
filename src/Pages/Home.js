@@ -4,11 +4,14 @@ import { apiGet } from "../misc/config";
 
 const Home = () => {
   const [input, setInput] = useState("");
+  const [result, setResult] = useState("");
+  const [searchOption, setSearchOption] = useState("shows");
 
   const onSearch = () => {
-    apiGet(`/search/shows?q=${input}`)
-      .then((res) => res.json())
-      .then((result) => console.log(result))
+    apiGet(`/search/${searchOption}?q=${input}`)
+      .then((result) => {
+        setResult(result);
+      })
       .catch((error) => console.log(error.message));
   };
   const onInputChange = (ev) => {
@@ -19,17 +22,62 @@ const Home = () => {
     ev.keyCode === 13 && onSearch();
   };
 
+  const renderResult = () => {
+    if (result && result.length === 0) {
+      return <div>Not Found</div>;
+    }
+    if (result && result.length > 0) {
+      console.log(result);
+      return (
+        <div>
+          {result[0].show
+            ? result.map((item) => (
+                <div key={item.show.id}>{item.show.name}</div>
+              ))
+            : result.map((item) => (
+                <div key={item.person.id}>{item.person.name}</div>
+              ))}
+        </div>
+      );
+    }
+  };
+  const isShowOption = searchOption === "shows";
+  const onRadioChange = (ev) => {
+    setSearchOption(ev.target.value);
+  };
   return (
     <MainPageLayout>
+      <label htmlFor="shows">
+        Show
+        <input
+          id="shows"
+          type="radio"
+          checked={isShowOption}
+          value="shows"
+          onChange={onRadioChange}
+        />
+      </label>
+      <label htmlFor="people">
+        Actor
+        <input
+          id="people"
+          type="radio"
+          checked={!isShowOption}
+          value="people"
+          onChange={onRadioChange}
+        />
+      </label>
       <input
         type="text"
         value={input}
+        placeholder="Search movie or actor"
         onKeyDown={onKeyDown}
         onChange={onInputChange}
       />
       <button type="button" onClick={onSearch}>
         Search
       </button>
+      {renderResult()}
     </MainPageLayout>
   );
 };
