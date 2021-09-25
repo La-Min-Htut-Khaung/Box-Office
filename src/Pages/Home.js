@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import MainPageLayout from "../components/MainPageLayout";
+import { apiGet } from "../misc/config";
 
 const Home = () => {
   const [input, setInput] = useState("");
 
   const onSearch = () => {
-    //http://api.tvmaze.com/search/shows?q=girls
-    fetch(`http://api.tvmaze.com/search/shows?q=${input}`)
+    apiGet(`/search/shows?q=${input}`)
       .then((res) => res.json())
       .then((result) => console.log(result))
       .catch((error) => console.log(error.message));
