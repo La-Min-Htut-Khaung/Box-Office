@@ -1,7 +1,10 @@
 import React, { useEffect, useReducer } from "react";
 import { useParams } from "react-router";
 import { apiGet } from "../misc/config";
-import NOT_FOUND from "../images/not-found.png";
+import ShowMainData from "../show/ShowMainData";
+import Details from "../show/Details";
+import Seasons from "../show/Seasons";
+import Cast from "../show/Cast";
 
 const initialState = {
   loading: false,
@@ -53,11 +56,33 @@ const Show = () => {
       isMount = false;
     };
   }, [id]);
+
   return (
     <div>
       {loading && "Loading"}
-      {data && <img src={data.image?.medium ?? NOT_FOUND} alt={data.name} />}
       {error && `error is ${error}`}
+
+      <ShowMainData
+        name={data.name}
+        rating={data.rating}
+        summary={data.summary}
+        tags={data.genres}
+        image={data.image}
+      />
+      <div>
+        <Details
+          status={data.status}
+          premiered={data.premiered}
+          network={data.network}
+        />
+      </div>
+      <div>
+        <Seasons seasons={data?._embedded?.seasons ?? []} />
+      </div>
+      <div>
+        Cast
+        <Cast cast={data?._embedded?.cast ?? []} />
+      </div>
     </div>
   );
 };
