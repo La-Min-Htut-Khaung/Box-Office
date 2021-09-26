@@ -5,6 +5,7 @@ import ShowMainData from "../show/ShowMainData";
 import Details from "../show/Details";
 import Seasons from "../show/Seasons";
 import Cast from "../show/Cast";
+import { InfoBlock, ShowPageWrapper } from "./Show.styled";
 
 const initialState = {
   loading: false,
@@ -58,7 +59,7 @@ const Show = () => {
   }, [id]);
 
   return (
-    <div>
+    <ShowPageWrapper>
       {loading && "Loading"}
       {error && `error is ${error}`}
 
@@ -69,21 +70,21 @@ const Show = () => {
         tags={data.genres}
         image={data.image}
       />
-      <div>
+      <InfoBlock>
         <Details
           status={data.status}
           premiered={data.premiered}
           network={data.network}
         />
-      </div>
-      <div>
+      </InfoBlock>
+      <InfoBlock>
         <Seasons seasons={data?._embedded?.seasons ?? []} />
-      </div>
-      <div>
+      </InfoBlock>
+      <InfoBlock>
         Cast
         <Cast cast={data?._embedded?.cast ?? []} />
-      </div>
-    </div>
+      </InfoBlock>
+    </ShowPageWrapper>
   );
 };
 
