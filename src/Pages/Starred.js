@@ -19,7 +19,8 @@ const Starred = () => {
         .then((results) => {
           setShows(results);
           setLoading(false);
-        });
+        })
+        .catch((error) => setError(error.message));
     } else {
       setLoading(false);
     }
