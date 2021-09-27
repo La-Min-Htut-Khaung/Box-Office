@@ -1,9 +1,15 @@
 import React, { useState } from "react";
 import ActorGrid from "../actor/ActorGrid";
+import CustomRadio from "../components/CustomRadio";
 import MainPageLayout from "../components/MainPageLayout";
 import { apiGet } from "../misc/config";
 import { useLastQuery } from "../misc/customHook";
 import ShowGrid from "../show/ShowGrid";
+import {
+  RadioInputsWrapper,
+  SearchButtonWrapper,
+  SearchInput,
+} from "./Home.styled";
 
 const Home = () => {
   const [input, setInput] = useLastQuery();
@@ -47,36 +53,39 @@ const Home = () => {
   };
   return (
     <MainPageLayout>
-      <label htmlFor="shows">
-        Show
-        <input
-          id="shows"
-          type="radio"
-          checked={isShowOption}
-          value="shows"
-          onChange={onRadioChange}
-        />
-      </label>
-      <label htmlFor="people">
-        Actor
-        <input
-          id="people"
-          type="radio"
-          checked={!isShowOption}
-          value="people"
-          onChange={onRadioChange}
-        />
-      </label>
-      <input
+      <SearchInput
         type="text"
         value={input}
         placeholder="Search movie or actor"
         onKeyDown={onKeyDown}
         onChange={onInputChange}
       />
-      <button type="button" onClick={onSearch}>
-        Search
-      </button>
+      <RadioInputsWrapper>
+        <div>
+          <CustomRadio
+            label="Shows"
+            id="shows"
+            checked={isShowOption}
+            value="shows"
+            onChange={onRadioChange}
+          />
+        </div>
+        <div>
+          <CustomRadio
+            label="Actor"
+            id="people"
+            checked={!isShowOption}
+            value="people"
+            onChange={onRadioChange}
+          />
+        </div>
+      </RadioInputsWrapper>
+      <SearchButtonWrapper>
+        <button type="button" onClick={onSearch}>
+          Search
+        </button>
+      </SearchButtonWrapper>
+
       {renderResult()}
     </MainPageLayout>
   );
