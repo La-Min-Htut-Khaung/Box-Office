@@ -11,34 +11,39 @@ const Show = () => {
   const { id } = useParams();
   const { loading, data, error } = useShow(id);
 
-  return (
-    <ShowPageWrapper>
-      {loading && "Loading"}
-      {error && `error is ${error}`}
-
-      <ShowMainData
-        name={data.name}
-        rating={data.rating}
-        summary={data.summary}
-        tags={data.genres}
-        image={data.image}
-      />
-      <InfoBlock>
-        <Details
-          status={data.status}
-          premiered={data.premiered}
-          network={data.network}
+  if (loading) {
+    return "Data Loading";
+  }
+  if (error) {
+    return `error is ${error}`;
+  }
+  if (!loading && !error && data) {
+    return (
+      <ShowPageWrapper>
+        <ShowMainData
+          name={data.name}
+          rating={data.rating}
+          summary={data.summary}
+          tags={data.genres}
+          image={data.image}
         />
-      </InfoBlock>
-      <InfoBlock>
-        <Seasons seasons={data?._embedded?.seasons ?? []} />
-      </InfoBlock>
-      <InfoBlock>
-        Cast
-        <Cast cast={data?._embedded?.cast ?? []} />
-      </InfoBlock>
-    </ShowPageWrapper>
-  );
+        <InfoBlock>
+          <Details
+            status={data.status}
+            premiered={data.premiered}
+            network={data.network}
+          />
+        </InfoBlock>
+        <InfoBlock>
+          <Seasons seasons={data?._embedded?.seasons ?? []} />
+        </InfoBlock>
+        <InfoBlock>
+          Cast
+          <Cast cast={data?._embedded?.cast ?? []} />
+        </InfoBlock>
+      </ShowPageWrapper>
+    );
+  }
 };
 
 export default Show;

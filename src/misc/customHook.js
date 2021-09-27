@@ -68,6 +68,7 @@ export function useShow(showId) {
     dispatch({
       type: "FETCH_LOADING",
     });
+
     apiGet(`/shows/${showId}?embed[]=seasons&embed[]=cast`)
       .then((res) => {
         if (isMount) {
@@ -84,6 +85,7 @@ export function useShow(showId) {
           payload: error.message,
         })
       );
+
     return () => {
       isMount = false;
     };

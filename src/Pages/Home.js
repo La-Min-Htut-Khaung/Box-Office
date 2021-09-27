@@ -13,25 +13,25 @@ import {
 
 const Home = () => {
   const [input, setInput] = useLastQuery();
-  const [result, setResult] = useState("");
+  const [result, setResult] = useState();
   const [searchOption, setSearchOption] = useState("shows");
+  const [loading, setLoading] = useState(false);
 
   const onSearch = () => {
-    apiGet(`/search/${searchOption}?q=${input}`)
-      .then((result) => {
-        setResult(result);
-      })
-      .catch((error) => console.log(error.message));
+    setLoading(true);
+    setTimeout(() => {
+      apiGet(`/search/${searchOption}?q=${input}`)
+        .then((result) => {
+          setResult(result);
+        })
+        .catch((error) => console.log(error.message));
+      setLoading(false);
+    }, 500);
   };
-  const onInputChange = (ev) => {
-    setInput(ev.target.value);
-  };
-
-  const onKeyDown = (ev) => {
-    ev.keyCode === 13 && onSearch();
-  };
-
-  const renderResult = () => {
+  const renderResult = (result) => {
+    if (loading) {
+      return <div>Data Loading</div>;
+    }
     if (result && result.length === 0) {
       return <div>Not Found</div>;
     }
@@ -47,6 +47,15 @@ const Home = () => {
       );
     }
   };
+
+  const onInputChange = (ev) => {
+    setInput(ev.target.value);
+  };
+
+  const onKeyDown = (ev) => {
+    ev.keyCode === 13 && onSearch();
+  };
+
   const isShowOption = searchOption === "shows";
   const onRadioChange = (ev) => {
     setSearchOption(ev.target.value);
@@ -86,7 +95,7 @@ const Home = () => {
         </button>
       </SearchButtonWrapper>
 
-      {renderResult()}
+      {renderResult(result)}
     </MainPageLayout>
   );
 };
