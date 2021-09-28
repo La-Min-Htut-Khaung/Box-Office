@@ -1,70 +1,107 @@
-# Getting Started with Create React App
+# Box Office React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Project URL : https://la-min-htut-khaung.github.io/Box-Office/#/
+API URL : https://www.tvmaze.com/api
 
-## Available Scripts
+## Description
 
-In the project directory, you can run:
+This project is created to search Movie or Actor.
 
-### `npm start`
+If you click Star Icon, App record the Starred ID and display in the starred page beside home button.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Technical Details 
 
-### `npm test`
+### React, React Router, useState, useEffect, useReducer ,useCallback, useMemo, customHook, Styled-components
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## How to setup this project
 
-### `npm run build`
+### 1. Scaffolding the project and dependencies
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+npx create-react-app
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 2. Creating Pages in React
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Install react-router-dom and setup App.js with BrowserRouter
 
-### `npm run eject`
+git commit -m 'Added react-router'
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### 3. Creating Navigation Bar & Page Components
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Create Nav.js in components folder and connect with react router
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+git commit -m 'added Navbar and Created Page Component'
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### 4. Multiple Layout Management
 
-## Learn More
+Create Home.js, MainPageLayout.js and Title.js
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+-> Home.js -> MainPageLayout.js {childern} -> <MainPageLayout>Tile.js</MainPageLayout>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+git commit -m 'Added layout Management and Created Title'
 
-### Code Splitting
+### 5. Creating Search Bar
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Create onSearch function to fetch API data
 
-### Analyzing the Bundle Size
+Click Button or Press Enter -> call the function - onSearch()
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+git commit -m 'created input and fetch results from https://www.tvmaze.com/api'
 
-### Making a Progressive Web App
+### 6. Displaying API results - Custom Render Function
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Create misc folder and config.js (Asynchronous API Data)
 
-### Advanced Configuration
+git commit -m 'Displayed show results and small fetch refactor'
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### 7. Adding Actors Search With Radio Buttons
 
-### Deployment
+Create onRadioChange() -> shows and actor Radio Button
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+git commit -m 'Added Search Option'
 
-### `npm run build` fails to minify
+### 8. Creating Preview Cards for Show and Actors
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Create show and actor folder && ShowGrid.js, ShowCard.js && ActorGrid.js, ActorCard.js
+
+git commit -m 'Created preview card for api data'
+
+### 9. Styled Component - An Alternative for styling
+
+npm install styled-components
+
+git commit -m 'installed styled components and created styles for search cards'
+
+### 10. Creating Show Page - useEffect, useReducer, customHook and dynamic URLs
+
+git commit -m 'Added show Page'
+
+### 11. Styling Show Page
+
+git commit -m 'Styled Show Page'
+
+### 12. Displaying starred show
+
+git commit -m 'Displaying starred show -> ShowGrid.js'
+
+### 13. Add animation to Element
+
+npm install react-fade-in
+
+git commit -m 'Add Animation'
+
+### 14. Styling Entire App
+
+git commit -m 'Styling Entire App'
+
+### 15. Component Optimization with Hook
+
+useMemo, useCallback
+
+git commit -m 'Optimization with hook'
+
+
+
+**Note: This Project is React Course Assignment **
+
+
